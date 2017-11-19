@@ -15,10 +15,6 @@ public class handController : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter(Collision collision) {
-		print ("Ouch");
-	}
-
 	void FixedUpdate () 
 	{
 		bool left = Input.GetKey(KeyCode.LeftArrow);

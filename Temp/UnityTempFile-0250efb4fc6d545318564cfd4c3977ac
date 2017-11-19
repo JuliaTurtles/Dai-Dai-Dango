@@ -92,6 +92,7 @@
 'Assets/Scripts/CameraFollow.cs'
 'Assets/Scripts/Dango.cs'
 'Assets/Scripts/DangoMaker.cs'
+'Assets/Scripts/Player.cs'
 'Assets/Scripts/handController.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll'

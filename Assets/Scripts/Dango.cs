@@ -32,9 +32,14 @@ public class Dango : MonoBehaviour {
 			var otherCollider = collision.gameObject.GetComponent<BoxCollider2D> ();
 			Destroy (otherCollider);
 
+			var player = getPlayer ();
+			player.addPoint ();
 
 			connected = true;
 		}
 	}
 
+	private Player getPlayer() {
+		return GameObject.Find ("Player").GetComponent<Player>();
+	}
 }
