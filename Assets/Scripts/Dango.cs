@@ -35,11 +35,18 @@ public class Dango : MonoBehaviour {
 			var player = getPlayer ();
 			player.addPoint ();
 
+			var hand = getHand ();
+			hand.addDangoHeight (transform.position.y - collision.transform.position.y);
+
 			connected = true;
 		}
 	}
 
 	private Player getPlayer() {
 		return GameObject.Find ("Player").GetComponent<Player>();
+	}
+
+	private HandController getHand() {
+		return GameObject.Find ("Hand").GetComponent<HandController> ();
 	}
 }

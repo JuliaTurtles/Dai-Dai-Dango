@@ -1,23 +1,24 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
-	public GameObject targetObject;
-	private float distanceToTarget;
+	private HandController hand;
+	private float initialCameraHeight;
 
 	// Use this for initialization
 	void Start () {
-		distanceToTarget = transform.position.y - targetObject.transform.position.y;
+		hand = GameObject.Find ("Hand").GetComponent<HandController> ();
+		initialCameraHeight = transform.position.y;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		float targetObjectY = targetObject.transform.position.y;
+		var currentHeight = transform.position.y;
+		var expectedHeight = initialCameraHeight + hand.getHeight ();
 
-		Vector3 newCameraPosition = transform.position;
-		newCameraPosition.y = targetObjectY + distanceToTarget;
-		transform.position = newCameraPosition;
-
+		if (currentHeight < expectedHeight) {
+			transform.position = new Vector3 (transform.position.x, transform.position.y + (Time.deltaTime * hand.getHeight()), transform.position.z);
+		}
 	}
 }
