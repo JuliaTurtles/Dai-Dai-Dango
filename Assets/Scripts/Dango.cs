@@ -28,6 +28,7 @@ public class Dango : MonoBehaviour {
 			fixedJoint.connectedBody = gameObject.GetComponent<Rigidbody2D>();
 			fixedJoint.autoConfigureConnectedAnchor = false;
 			fixedJoint.enableCollision = false;
+			fixedJoint.frequency = 0;
 
 			var otherCollider = collision.gameObject.GetComponent<BoxCollider2D> ();
 			Destroy (otherCollider);
@@ -37,6 +38,9 @@ public class Dango : MonoBehaviour {
 
 			var hand = getHand ();
 			hand.addDangoHeight (transform.position.y - collision.transform.position.y);
+
+			var rigidBody = GetComponent<Rigidbody2D> ();
+			rigidBody.mass = 0.0001f;
 
 			connected = true;
 		}

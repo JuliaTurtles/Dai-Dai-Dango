@@ -17,86 +17,31 @@ public class Background : MonoBehaviour {
 	void Update () {
 
 	}
-	void AddScreen(float farthestScreenEndY)
-	{
-		//1
-		int randomScreenIndex = Random.Range(0, availableScreens.Length);
 
-		//2
-		GameObject screen = (GameObject)Instantiate(availableScreens[randomScreenIndex]);
+	void FixedUpdate () {    
+		var cameraHeight = getCameraHeight ();
+		var screenHeight = maxScreenHeight ();
+		if (cameraHeight > screenHeight / 2) {
+			Debug.Log("new screen");
+			var index = Random.Range (0, availableScreens.Length);
+			var newScreen = availableScreens [index];
+			var gameObject = Instantiate (newScreen);
+			gameObject.transform.position = new Vector3 (0, screenHeight + 60.9f);
+			currentScreens.Add (gameObject);
 
-		//3
-		float screenHeight = screen.transform.Find("wallLeft").localScale.y;
-
-		//4
-		float screenCenter = farthestScreenEndY + screenHeight * 0.5f;
-
-		//5
-		screen.transform.position = new Vector3(screenCenter, 0, 0);
-
-		//6
-		currentScreens.Add(screen);         
+		}
+	}
+	private float getCameraHeight(){
+		return Camera.main.gameObject.transform.position.y; 
+	}
+	private float maxScreenHeight(){
+		var max = 0.0f;
+		foreach (var screen in currentScreens) {
+			var screenHeight = screen.transform.position.y;
+			if (screenHeight > max) {
+				max = screenHeight;
+			}
+		}
+		return max;
 	} 
-	void GenerateScreenIfRequired()
-	{
-		//1
-		List<GameObject> screensToRemove = new List<GameObject>();
-
-		//2
-		bool addScreens = true;        
-
-		//3
-		float playerY = transform.position.y;
-
-		//4
-		float removeScreenY = playerY - screenHeightInPoints;        
-
-		//5
-		float addScreenY = playerY + screenHeightInPoints;
-
-		//6
-		float farthestScreenEndY = 0;
-
-		foreach(var screen in currentScreens)
-		{
-			//7
-
-			float screenHeight = screen.transform.Find("wallLeft").localScale.y;
-			float screenStartY = screen.transform.position.y - (screenHeight * 0.5f);    
-			float screenEndY = screenStartY + screenHeight;                            
-			Debug.Log("addScreenY");
-			Debug.Log (addScreenY);
-			Debug.Log ("screenStartY");
-			Debug.Log (screenStartY);
-			Debug.Log ("screenEndY");
-			Debug.Log (screenEndY);
-
-			//8
-			if (screenStartY > addScreenY)
-				addScreens = false;
-
-			//9
-			if (screenEndY < removeScreenY)
-				screensToRemove.Add(screen);
-
-			//10
-			farthestScreenEndY = Mathf.Max(farthestScreenEndY, screenEndY);
-		}
-
-		//11
-		foreach(var screen in screensToRemove)
-		{
-			currentScreens.Remove(screen);
-			Destroy(screen);            
-		}
-
-		//12
-		if (addScreens)
-			AddScreen(farthestScreenEndY);
-	}
-
-	void FixedUpdate () 
-	{    
-		GenerateScreenIfRequired();
-	}
 }

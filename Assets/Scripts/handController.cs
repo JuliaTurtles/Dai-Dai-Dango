@@ -39,6 +39,5 @@ public class HandController : MonoBehaviour {
 
 	public void addDangoHeight(float dangoHeight) {
 		height += dangoHeight;
-		Debug.Log ("New height: " + height);
 	}
 }

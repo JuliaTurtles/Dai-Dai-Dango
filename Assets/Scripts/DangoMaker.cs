@@ -6,10 +6,11 @@ public class DangoMaker : MonoBehaviour {
 	public GameObject[] dangos;
 	public float dangoRate = 1;
 	private float timeSinceLastDango = 0;
+	private HandController hand;
 
 	// Use this for initialization
 	void Start () {
-		
+		hand = GameObject.Find ("Hand").GetComponent<HandController> ();
 	}
 
 	void FixedUpdate () {
@@ -23,7 +24,7 @@ public class DangoMaker : MonoBehaviour {
 
 	void CreateDango () {
 		float xCoordinate = (Random.value * 30.0f) - 15.0f;
-		float yCoordinate = 32.0f;
+		float yCoordinate = 32.0f + hand.getHeight();
 		int dangoIndex = Random.Range (0, dangos.Length);
 		GameObject dango = (GameObject)Instantiate (dangos [dangoIndex]);
 		dango.transform.position = new Vector3 (xCoordinate, yCoordinate, -1);
