@@ -6,11 +6,11 @@ public class DangoMaker : MonoBehaviour {
 	public GameObject[] dangos;
 	public float dangoRate = 1;
 	private float timeSinceLastDango = 0;
-	private HandController hand;
+	private GameController hand;
 
 	// Use this for initialization
 	void Start () {
-		hand = GameObject.Find ("Hand").GetComponent<HandController> ();
+		hand = GameObject.Find ("Game Controller").GetComponent<GameController> ();
 	}
 
 	void FixedUpdate () {

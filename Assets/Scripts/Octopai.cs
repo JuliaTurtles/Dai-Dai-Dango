@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dango : MonoBehaviour {
+public class Octopai : MonoBehaviour {
 	private bool connected;
 
 	// Use this for initialization
 	void Start () {
 		connected = false;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (transform.position.y < -35.0) {
@@ -30,6 +30,9 @@ public class Dango : MonoBehaviour {
 			fixedJoint.enableCollision = false;
 			fixedJoint.frequency = 0;
 
+			var otherCollider = collision.gameObject.GetComponent<BoxCollider2D> ();
+			Destroy (otherCollider);
+
 			var player = getPlayer ();
 			player.addPoint ();
 
@@ -39,8 +42,6 @@ public class Dango : MonoBehaviour {
 
 			var rigidBody = GetComponent<Rigidbody2D> ();
 			rigidBody.mass = 0.0001f;
-
-			rigidBody.constraints = RigidbodyConstraints2D.FreezePositionY;
 
 			connected = true;
 		}
