@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HandController : MonoBehaviour {
-	public float jetpackForce = 75.0f;
-	public float forwardMovementSpeed = 3.0f;
+	public float moveSpeed = 10.0f;
 	private float height;
 	private bool dead = false;
+	private Vector3 moveVector = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
 		height = 0;
 	}
-	// Update is called once per frame
-	void Update () {
 
-	}
-
-	void FixedUpdate () 
+	void Update () 
 	{
-		bool left = Input.GetKey(KeyCode.LeftArrow);
-		bool right = Input.GetKey(KeyCode.RightArrow);
-		var moveVector = new Vector3 (1, 0, 0);
+		moveVector.x = -Input.acceleration.y * moveSpeed;
+		if (moveVector.x != 0) {
+			print ("Moving");
+			print (moveVector.x);
+		}
+
 		var xPosition = transform.position.x;
+		var left = moveVector.x < 0;
+		var right = moveVector.x > 0;
 
 		if (left && xPosition > -15)
 		{			
