@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 	private int score;
+	public int health;
+	public GameSceneManager sceneManager;
 
 	// Use this for initialization
 	void Start () {
@@ -18,9 +20,18 @@ public class Player : MonoBehaviour {
 	public int getScore() {
 		return score;
 	}
+	public int getHealth() {
+		return health;
+	}
 
 	public void addPoint() {
 		score = score + 1;
 		Debug.Log ("New score: " + score);
+	}
+	public void removeHealth() {
+		health = health - 1;
+		if (health == 0) {
+			sceneManager.LoadEndGame ();
+		}
 	}
 }
