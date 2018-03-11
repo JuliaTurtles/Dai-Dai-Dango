@@ -18,7 +18,10 @@ public class Dango : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
-		var contactPoint = collision.contacts [0].point;
+		if (collision.contacts.Length == 0) {
+			return;
+		}
+		var contactPoint = collision.contacts[0].point;
 		var center = collision.collider.bounds.center;
 		var topCollision = contactPoint.y > center.y;
 
