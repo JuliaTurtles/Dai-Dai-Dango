@@ -40,7 +40,7 @@ public class Octopai : MonoBehaviour {
 			player.removeHealth ();
 
 			var hand = getHand ();
-			hand.addDangoHeight (transform.position.y - collision.transform.position.y);
+			hand.addDango (gameObject, transform.position.y - collision.transform.position.y);
 
 			var rigidBody = GetComponent<Rigidbody2D> ();
 			rigidBody.mass = 0.0001f;

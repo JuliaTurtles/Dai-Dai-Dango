@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour {
 	private float height;
+	private List<GameObject> connectedObjects;
 
 	// Use this for initialization
 	void Start () {
 		height = 0;
+		connectedObjects = new List<GameObject> ();
 	}
 	// Update is called once per frame
 	void Update () {
@@ -33,8 +35,8 @@ public class HandController : MonoBehaviour {
 	public float getHeight () {
 		return height;
 	}
-
-	public void addDangoHeight(float dangoHeight) {
+	public void addDango(GameObject dango, float dangoHeight) {
 		height += dangoHeight;
+		connectedObjects.Add (dango);
 	}
 }
