@@ -6,6 +6,8 @@ public class Background : MonoBehaviour {
 	public GameObject[] availableScreens;
 	public List<GameObject> currentScreens;
 	private float screenHeightInPoints;
+	public GameObject[] availablePlanets;
+	public GameObject star;
 
 	// Use this for initialization
 	void Start () {
@@ -27,8 +29,34 @@ public class Background : MonoBehaviour {
 			var newScreen = availableScreens [index];
 			var gameObject = Instantiate (newScreen);
 			gameObject.transform.position = new Vector3 (0, screenHeight + 60.9f);
+			addPlanets ();
+			addStars ();
 			currentScreens.Add (gameObject);
 
+		}
+	}
+	private void addPlanets(){
+		var numPlanets = Mathf.Floor (Random.value * 3 + 1);
+		for (var i = 0; i < numPlanets; i++) {
+			var xCoordinate = Random.Range (-15.0f, 15.0f);
+			var yCoordinate = Random.Range (maxScreenHeight(), maxScreenHeight() + 60.9f);
+			var scale = Random.Range (0.5f, 1.5f);
+			var index = Random.Range (0, availablePlanets.Length);
+			var newPlanet = availablePlanets [index];
+			var gameObject = Instantiate (newPlanet);
+			gameObject.transform.position = new Vector3 (xCoordinate, yCoordinate);
+			gameObject.transform.localScale = new Vector3 (scale, scale);
+		}
+	}
+	private void addStars(){
+		var numStars = Mathf.Floor (Random.value * 25 + 1);
+		for (var i = 0; i < numStars; i++) {
+			var xCoordinate = Random.Range (-15.0f, 15.0f);
+			var yCoordinate = Random.Range (maxScreenHeight(), maxScreenHeight() + 60.9f);
+			var scale = Random.Range (0.4f, 0.6f);
+			var gameObject = Instantiate (star);
+			gameObject.transform.position = new Vector3 (xCoordinate, yCoordinate);
+			gameObject.transform.localScale = new Vector3 (scale, scale);
 		}
 	}
 	private float getCameraHeight(){
