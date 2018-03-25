@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		hand = GameObject.Find ("Hand").GetComponent<HandController> ();
+		hand = GameObject.Find ("Player").GetComponent<HandController> ();
 		initialCameraHeight = transform.position.y;
 	}
 

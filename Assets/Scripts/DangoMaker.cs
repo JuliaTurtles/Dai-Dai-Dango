@@ -13,7 +13,7 @@ public class DangoMaker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		hand = GameObject.Find ("Hand").GetComponent<HandController> ();
+		hand = GameObject.Find ("Player").GetComponent<HandController> ();
 		player = GameObject.Find ("Player").GetComponent<Player> ();
 		numberOfDangos = dangos.Count;
 

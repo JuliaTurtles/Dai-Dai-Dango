@@ -43,7 +43,8 @@ public class Dango : MonoBehaviour {
 			hand.addDango (gameObject, transform.position.y - collision.transform.position.y);
 
 			var rigidBody = GetComponent<Rigidbody2D> ();
-			rigidBody.mass = 0.0001f;
+
+			rigidBody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 
 			connected = true;
 		}
@@ -54,6 +55,6 @@ public class Dango : MonoBehaviour {
 	}
 
 	private HandController getHand() {
-		return GameObject.Find ("Hand").GetComponent<HandController> ();
+		return GameObject.Find ("Player").GetComponent<HandController> ();
 	}
 }
