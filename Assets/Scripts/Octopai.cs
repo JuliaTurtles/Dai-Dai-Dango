@@ -25,15 +25,21 @@ public class Octopai : MonoBehaviour {
 		var center = collision.collider.bounds.center;
 		var topCollision = contactPoint.y > center.y;
 
-		if (collision.gameObject.tag != "Wall" && !connected && topCollision) {
-			this.transform.position = new Vector3 (collision.collider.bounds.center.x, this.transform.position.y, this.transform.position.z);
+		if (collision.gameObject.tag == "Connected" && !connected && topCollision) {
+			var otherCollider = collision.gameObject.GetComponent<BoxCollider2D> ();
+			this.transform.position = new Vector3 (
+				collision.collider.bounds.center.x,
+				collision.collider.bounds.center.y + collision.collider.bounds.extents.y*2,
+				this.transform.position.z
+			);
+
 			var fixedJoint = collision.gameObject.AddComponent<FixedJoint2D> ();
 			fixedJoint.connectedBody = gameObject.GetComponent<Rigidbody2D>();
 			fixedJoint.autoConfigureConnectedAnchor = false;
 			fixedJoint.enableCollision = false;
 			fixedJoint.frequency = 0;
+			gameObject.tag = "Connected";
 
-			var otherCollider = collision.gameObject.GetComponent<BoxCollider2D> ();
 			Destroy (otherCollider);
 
 			var player = getPlayer ();
