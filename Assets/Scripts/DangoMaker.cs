@@ -36,7 +36,7 @@ public class DangoMaker : MonoBehaviour {
 
 	void CreateDango () {
 		float xCoordinate = (Random.value * 30.0f) - 15.0f;
-		float yCoordinate = 32.0f + hand.getHeight();
+		float yCoordinate = 52.0f + hand.getHeight();
 		int dangoIndex = Random.Range (0, dangos.Count);
 		GameObject dango = (GameObject)Instantiate (dangos [dangoIndex]);
 		dango.transform.position = new Vector3 (xCoordinate, yCoordinate, -1);

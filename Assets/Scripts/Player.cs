@@ -31,6 +31,11 @@ public class Player : MonoBehaviour {
 	public void removeHealth() {
 		health = health - 1;
 		if (health == 0) {
+			PlayerPrefs.SetInt ("score", score);
+			var highScore = PlayerPrefs.GetInt ("high score");
+			if (score > highScore) {
+				PlayerPrefs.SetInt ("high score", score);
+			}
 			sceneManager.LoadEndGame ();
 		}
 	}
