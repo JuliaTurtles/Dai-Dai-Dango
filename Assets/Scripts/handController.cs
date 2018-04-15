@@ -8,6 +8,7 @@ public class HandController : MonoBehaviour {
 	public float speed = 1.0f;
 	public float newSpeed = 3.0f;
 	private bool removedHand = false;
+	private Vector3 moveVector = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
@@ -15,18 +16,19 @@ public class HandController : MonoBehaviour {
 		connectedObjects = new List<GameObject> ();
 		connectedObjects.Add (getHand ());
 	}
-	// Update is called once per frame
-	void Update () {
 
-	}
-
-	void FixedUpdate () 
+	void Update () 
 	{
-		bool left = Input.GetKey(KeyCode.LeftArrow);
-		bool right = Input.GetKey(KeyCode.RightArrow);
-		var moveVector = new Vector3 (getSpeed(), 0, 0);
 		var controlledTransform = connectedObjects [0].transform;
 		var xPosition = controlledTransform.position.x;
+		moveVector.x = -Input.acceleration.y * getSpeed();
+		if (moveVector.x != 0) {
+			print ("Moving");
+			print (moveVector.x);
+		}
+			
+		var left = moveVector.x < 0;
+		var right = moveVector.x > 0;
 
 		if (left && xPosition > -15)
 		{			
