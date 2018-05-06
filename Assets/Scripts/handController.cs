@@ -8,10 +8,13 @@ public class HandController : MonoBehaviour {
 	public float speed = 1.0f;
 	public float newSpeed = 3.0f;
 	private bool removedHand = false;
+	private enum Direction {Left, Right, Neutral};
+	private Direction direction;
 
 	// Use this for initialization
 	void Start () {
 		height = 0;
+		direction = Direction.Neutral;
 		connectedObjects = new List<GameObject> ();
 		connectedObjects.Add (getHand ());
 	}
@@ -22,17 +25,35 @@ public class HandController : MonoBehaviour {
 
 	void FixedUpdate () 
 	{
-		bool left = Input.GetKey(KeyCode.LeftArrow);
-		bool right = Input.GetKey(KeyCode.RightArrow);
-		var moveVector = new Vector3 (getSpeed(), 0, 0);
+		if (direction == Direction.Left) {
+			moveLeft ();
+		} 
+		else if (direction == Direction.Right) {
+			moveRight ();
+		}
+	}
+	public void setLeft (){
+		direction = Direction.Left;
+	}
+	public void setRight(){
+		direction = Direction.Right;
+	}
+	public void setNeutral (){
+		direction = Direction.Neutral;
+	}
+	private void moveLeft (){
 		var controlledTransform = connectedObjects [0].transform;
 		var xPosition = controlledTransform.position.x;
-
-		if (left && xPosition > -15)
-		{			
+		if (xPosition > -15) {
+			var moveVector = new Vector3 (getSpeed(), 0, 0);
 			controlledTransform.position = controlledTransform.position - moveVector;
 		}
-		if (right && xPosition < 15) {
+	}
+	private void moveRight (){
+		var controlledTransform = connectedObjects [0].transform;
+		var xPosition = controlledTransform.position.x;
+		if (xPosition < 15) {
+			var moveVector = new Vector3 (getSpeed(), 0, 0);
 			controlledTransform.position = controlledTransform.position + moveVector;
 		}
 	}
