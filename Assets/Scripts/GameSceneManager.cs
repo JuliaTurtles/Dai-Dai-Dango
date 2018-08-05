@@ -10,4 +10,7 @@ public class GameSceneManager : MonoBehaviour {
 	public void LoadEndGame(){
 		SceneManager.LoadScene ("Dead Scene");
 	}
+	public void LoadViewComics(){
+		SceneManager.LoadScene ("Comics Screen");
+	}
 }
