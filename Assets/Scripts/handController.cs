@@ -62,6 +62,7 @@ public class HandController : MonoBehaviour {
 		return height;
 	}
 	public void addDango(GameObject dango, float dangoHeight) {
+		DangoTracker.trackDango (dango);
 		height += dangoHeight;
 		connectedObjects.Add (dango);
 		if (connectedObjects.Count > 20) {
